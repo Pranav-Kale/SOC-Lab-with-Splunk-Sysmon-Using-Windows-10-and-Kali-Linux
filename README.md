@@ -7,7 +7,7 @@
 4. [Network Topology](#-network-topology)
 5. [Step 1: Environment Setup](#️-step-1-environment-setup)
 6. [Step 2: Network Configuration](#-step-2--network-configuration)
-7. [Step 3: Initial Network Scanning](#-step-3--initial-network-scanning)
+7. [Step 3: Initial Network Scanning](#-step-3--initial-network-scanning-)
 8. [Step 4: Scanning & Attempted SMB Exploitation](#step-4-scanning-attempted-smb-exploitation)
 9. [Step 5: Creating an RDP Vulnerability](#-step-5-creating-an-rdp-vulnerability-)
 10. [Step 6: Payload Creation & Listener Setup](#-step-6--payload-delivery-&-exploitation-attempt)
