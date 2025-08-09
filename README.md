@@ -107,8 +107,8 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 🔄 From Windows 10, pinged Kali Linux → ✅ success.  
 🛑 Disabled Public Network Firewall on Windows 10 for testing.  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d93f2312-79db-422d-87ed-d5c849d9a072" alt="LAN Segment & IP settings" width="250" height="199" />
-  <img src="https://github.com/user-attachments/assets/0e096288-b68f-4d9e-8d54-3dc371355a36" alt="VMware Settings" width="250" height="199" />
+  <img src="https://github.com/user-attachments/assets/d93f2312-79db-422d-87ed-d5c849d9a072" alt="LAN Segment & IP settings"  height="250" />
+  <img src="https://github.com/user-attachments/assets/0e096288-b68f-4d9e-8d54-3dc371355a36" alt="VMware Settings"  height="250" />
 </p>
 
 ---  
