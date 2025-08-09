@@ -35,7 +35,7 @@ Both VMs communicate only within the isolated network
 
 ---  
 
-🔍 Workflow Overview  
+## 🔍 Workflow Overview  
 
 ⚙️ Setup & Configuration :   
 💻 Install & configure Splunk on Windows 10  
@@ -59,7 +59,7 @@ Covers SMB brute-force login attempts and RDP exploitation scenarios
 ---  
 
 
-🔧 Prerequisites  
+## 🔧 Prerequisites  
 
 | Requirement               | Description                                                                   |  
 | ------------------------- | ----------------------------------------------------------------------------- |  
@@ -74,13 +74,13 @@ Covers SMB brute-force login attempts and RDP exploitation scenarios
 
 ---  
 
-🌐 Network Topology  
+## 🌐 Network Topology  
 Below is the network topology of the SOC Home lab environment:  
 <img width="577" height="199" alt="diagram-export-8-9-2025-8_06_10-PM" src="https://github.com/user-attachments/assets/d9492b0a-4bf7-4905-81f1-693fed0037de" />
 
 ---  
 
-🛠️ Step 1: Environment Setup  
+## 🛠️ Step 1: Environment Setup  
 Install Kali Linux (Attacker) via Kali ISO → Update & upgrade system.  
 Install Windows 10 (Target) via Windows ISO → Enable networking for VM communication.  
 Install Splunk on Windows from Splunk → Enable log collection.  
@@ -88,7 +88,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 
 ---  
 
-🌐 Step 2: 🛠 Network Configuration  
+## 🌐 Step 2: 🛠 Network Configuration  
 🔌 Set VM network adapter → LAN Segment for isolated lab setup.  
 📍 Assigned static IPs:  
 🖥 Windows 10 VM → 192.168.56.2  
@@ -99,19 +99,9 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
   <img height="199" src="https://github.com/user-attachments/assets/84137f91-8150-43e8-bb99-42413128a7e5" alt="VMware Settings" width="250" />
 </p>
 
-
 ---  
 
-🔍 Step 3: 🕵️ Initial Network Scanning  
-📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
-🛰 Ran Nmap scan → 🔒 all ports filtered.  
-🔄 From Windows 10, pinged Kali Linux → ✅ success.  
-🛑 Disabled Public Network Firewall on Windows 10 for testing.  
-📸 [Image placeholders: Nmap results & firewall settings]  
-
----  
-
-🔍 Step 3: 🕵️ Initial Network Scanning  
+## 🔍 Step 3: 🕵️ Initial Network Scanning  
 📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
 🛰 Ran Nmap scan → 🔒 all ports filtered.  
 🔄 From Windows 10, pinged Kali Linux → ✅ success.  
@@ -124,7 +114,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 
 ---  
 
-⚡ Step 4: 🎯 Scanning & Attempted SMB Exploitation  
+## ⚡ Step 4: 🎯 Scanning & Attempted SMB Exploitation  
 📡 Nmap scan after disabling firewall revealed open ports:  
 135 🛠 RPC  
 445 📂 SMB  
@@ -148,7 +138,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
  
 ---  
 
-🔄 Step 5: Creating an RDP Vulnerability 💻🔓  
+## 🔄 Step 5: Creating an RDP Vulnerability 💻🔓  
 Since SMB was a dead end, I decided to create my own vulnerability by enabling Remote Desktop Protocol (RDP, Port 3389) and intentionally misconfiguring it.  
 
 🛠 Steps Taken:  
@@ -184,7 +174,7 @@ Ready for RDP exploitation in the next step!
 ---  
 
 
-🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt  
+## 🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt  
 With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.  
 🛠 Payload Creation (MSFvenom)  
 
@@ -224,7 +214,7 @@ Ready for delivery to target 🎯 (execution attempt covered in the next step)
 
 ---  
 
-🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained  
+## 🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained  
 💻 On Target (Windows 10):  
 1️⃣ Opened browser → http://192.168.56.3:9999 🌐  
 2️⃣ Downloaded projectreport.pdf 📄 (actually projectreport.pdf.exe 🐍 — .exe hidden)  
@@ -255,7 +245,7 @@ Inside Meterpreter:
 
 ---  
 
-📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️  
+## 📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️  
 💡 Objective: Track malware activity (projectreport.pdf.exe) using Splunk Search & Reporting.  
 🛠️ Actions Performed  
 1️⃣ Opened Splunk → Search & Reporting App 📈  
@@ -298,7 +288,7 @@ command_line 💻 — Full execution command
 
 ---  
 
-🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣  
+## 🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣  
 💡 Objective: Map the attacker’s actions (Meterpreter session) to endpoint telemetry collected by Splunk for full visibility.  
 
 🛠️ Actions Performed  
@@ -329,7 +319,7 @@ File Download → Execution → Reverse Shell → Commands → Detection in Splu
 
 ---  
 
-🚀 Next Steps & Future Enhancements  
+## 🚀 Next Steps & Future Enhancements  
 🔍 Option 1: Deploy ELK Stack for deeper, faster, and more flexible log analysis — fully customized for your environment.  
 🛡️ Option 2: Deploy Wazuh SIEM (built on ELK) for advanced threat detection, automated correlation rules, and ready-made SOC dashboards.  
 🐍 Use Python automation scripts to streamline the attack workflow.  
@@ -337,7 +327,7 @@ File Download → Execution → Reverse Shell → Commands → Detection in Splu
 
 ---  
 
-🏁 Conclusion  
+## 🏁 Conclusion  
 Through this project, we were able to:  
 🏗️ Build a fully functional cybersecurity home lab  
 💣 Simulate & analyze malware-based attacks  
@@ -346,6 +336,6 @@ Through this project, we were able to:
 
 ---  
 
-📌 Let’s Connect  
+## 📌 Let’s Connect  
 💼 [LinkedIn](https://www.linkedin.com/in/pranavkale1124/)  
 🖥️ [GitHub](https://github.com/Pranav-Kale)  
