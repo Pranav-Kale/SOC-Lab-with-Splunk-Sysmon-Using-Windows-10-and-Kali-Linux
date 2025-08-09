@@ -8,7 +8,7 @@
 5. [Step 1: Environment Setup](#️-step-1-environment-setup)
 6. [Step 2: Network Configuration](#-step-2--network-configuration)
 7. [Step 3: Initial Network Scanning](#-step-3--initial-network-scanning)
-8. [Step 4: Scanning & Attempted SMB Exploitation](#-step-4--scanning-&-attempted-smb-exploitation)
+8. [Step 4: Scanning & Attempted SMB Exploitation](#step-4-scanning-attempted-smb-exploitation)
 9. [Step 5: Creating an RDP Vulnerability](#-step-5-creating-an-rdp-vulnerability-)
 10. [Step 6: Payload Creation & Listener Setup](#-step-6--payload-delivery-&-exploitation-attempt)
 11. [Step 7: Payload Delivery & Reverse Shell](#️-step-7--payload-delivery-&-reverse-shell-gained)
@@ -20,7 +20,7 @@
 
 
 ---  
-## 📌Introduction  
+## 📌Introduction
 This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
 
 The setup includes:  
@@ -35,7 +35,7 @@ Both VMs communicate only within the isolated network
 
 ---  
 
-## 🔍 Workflow Overview  
+## 🔍 Workflow Overview
 
 ⚙️ Setup & Configuration :   
 💻 Install & configure Splunk on Windows 10  
@@ -74,13 +74,13 @@ Covers SMB brute-force login attempts and RDP exploitation scenarios
 
 ---  
 
-## 🌐 Network Topology  
+## 🌐 Network Topology
 Below is the network topology of the SOC Home lab environment:  
 <img width="577" height="199" alt="diagram-export-8-9-2025-8_06_10-PM" src="https://github.com/user-attachments/assets/d9492b0a-4bf7-4905-81f1-693fed0037de" />
 
 ---  
 
-## 🛠️ Step 1: Environment Setup  
+## 🛠️ Step 1: Environment Setup
 Install Kali Linux (Attacker) via Kali ISO → Update & upgrade system.  
 Install Windows 10 (Target) via Windows ISO → Enable networking for VM communication.  
 Install Splunk on Windows from Splunk → Enable log collection.  
@@ -88,7 +88,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 
 ---  
 
-## 🌐 Step 2: 🛠 Network Configuration  
+## 🌐 Step 2: 🛠 Network Configuration
 🔌 Set VM network adapter → LAN Segment for isolated lab setup.  
 📍 Assigned static IPs:  
 🖥 Windows 10 VM → 192.168.56.2  
@@ -101,7 +101,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 
 ---  
 
-## 🔍 Step 3: 🕵️ Initial Network Scanning  
+## 🔍 Step 3: 🕵️ Initial Network Scanning
 📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
 🛰 Ran Nmap scan → 🔒 all ports filtered.  
 🔄 From Windows 10, pinged Kali Linux → ✅ success.  
@@ -111,10 +111,9 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
   <img src="https://github.com/user-attachments/assets/0e096288-b68f-4d9e-8d54-3dc371355a36" alt="VMware Settings" width="250" height="199" />
 </p>
 
-
 ---  
 
-## ⚡ Step 4: 🎯 Scanning & Attempted SMB Exploitation  
+## ⚡ Step 4: 🎯 Scanning & Attempted SMB Exploitation
 📡 Nmap scan after disabling firewall revealed open ports:  
 135 🛠 RPC  
 445 📂 SMB  
@@ -174,7 +173,7 @@ Ready for RDP exploitation in the next step!
 ---  
 
 
-## 🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt  
+## 🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt
 With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.  
 🛠 Payload Creation (MSFvenom)  
 
@@ -214,7 +213,7 @@ Ready for delivery to target 🎯 (execution attempt covered in the next step)
 
 ---  
 
-## 🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained  
+## 🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained
 💻 On Target (Windows 10):  
 1️⃣ Opened browser → http://192.168.56.3:9999 🌐  
 2️⃣ Downloaded projectreport.pdf 📄 (actually projectreport.pdf.exe 🐍 — .exe hidden)  
@@ -245,7 +244,7 @@ Inside Meterpreter:
 
 ---  
 
-## 📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️  
+## 📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️
 💡 Objective: Track malware activity (projectreport.pdf.exe) using Splunk Search & Reporting.  
 🛠️ Actions Performed  
 1️⃣ Opened Splunk → Search & Reporting App 📈  
@@ -288,7 +287,7 @@ command_line 💻 — Full execution command
 
 ---  
 
-## 🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣  
+## 🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣
 💡 Objective: Map the attacker’s actions (Meterpreter session) to endpoint telemetry collected by Splunk for full visibility.  
 
 🛠️ Actions Performed  
