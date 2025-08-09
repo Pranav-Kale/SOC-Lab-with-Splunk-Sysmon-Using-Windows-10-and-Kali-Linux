@@ -17,7 +17,7 @@
 
 ---  
 ## 📌#Introduction  
-This project demonstrates the creation of a Security Operations Center Home (SOCHOM) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
+This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
 
 The setup includes:  
 💻 Windows 10 Virtual Machine – The target machine  
@@ -71,7 +71,7 @@ Covers SMB brute-force login attempts and RDP exploitation scenarios
 ---  
 
 🌐 Network Topology  
-Below is the network topology of the SOCHOM lab environment:  
+Below is the network topology of the SOC Home lab environment:  
 <img width="577" height="199" alt="diagram-export-8-9-2025-8_06_10-PM" src="https://github.com/user-attachments/assets/d9492b0a-4bf7-4905-81f1-693fed0037de" />
 
 ---  
