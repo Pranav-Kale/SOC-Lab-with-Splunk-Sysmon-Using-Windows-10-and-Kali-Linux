@@ -2,9 +2,9 @@
 
 ## Table of Contents 
 1. [Introduction](#introduction)
-2. [Workflow Overview](#workflow-overview)
+2. [Workflow Overview](#-workflow-overview)
 3. [Prerequisites](#-prerequisites)
-4. [Network Topology](#network-topology)
+4. [Network Topology](#-network-topology)
 5. [Step 1: Environment Setup](#️-step-1-environment-setup)
 6. [Step 2: Network Configuration](#-step-2--network-configuration)
 7. [Step 3: Initial Network Scanning](#-step-3--initial-network-scanning)
