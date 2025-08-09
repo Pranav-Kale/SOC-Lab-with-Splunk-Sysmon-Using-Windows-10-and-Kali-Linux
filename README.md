@@ -1,4 +1,4 @@
-# 👨‍💻SOC Home Lab: Using Splunk & Sysmon🚀 hello
+# 👨‍💻SOC Home Lab: Using Splunk & Sysmon🚀
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -19,10 +19,14 @@
 ## 📌#Introduction
 This project demonstrates the creation of a Security Operations Center Home (SOCHOM) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.
 
-The setup includes:
-💻 Windows 10 Virtual Machine – The target machine
+The setup includes :
+
+💻 Windows 10 Virtual Machine – The target machine 
+
 🐉 Kali Linux Virtual Machine – The attacker machine
+
 📊 Splunk – Security Information and Event Management (SIEM) tool for log aggregation and monitoring
+
 📜 Sysmon – A system monitoring tool for detailed Windows event logging
 
 🌐 Network Setup
