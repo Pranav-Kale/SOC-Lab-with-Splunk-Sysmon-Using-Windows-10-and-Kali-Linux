@@ -1,20 +1,23 @@
 # 👨‍💻SOC Home Lab: Using Splunk & Sysmon🚀
 
 ## Table of Contents
-1. [Introduction](#Introduction)
-1. [Workflow Overview](#Workflow Overview)
-2. [Prerequisites](#prerequisites)
-3. [Network Topology](#network-topology)
-4. [Step 1: Setting Up Virtual Machines](#step-1-setting-up-virtual-machines)
-5. [Step 2: Installing Splunk for Log Monitoring](#step-2-installing-splunk-for-log-monitoring)
-6. [Step 3: Installing Sysmon on Windows 10](#step-3-installing-sysmon-on-windows-10)
-7. [Step 4: Generating Malware with msfvenom](#step-4-generating-malware-with-msfvenom)
-8. [Step 5: Setting Up a Metasploit Listener](#step-5-setting-up-a-metasploit-listener)
-9. [Step 6: Monitoring Logs with Splunk](#step-6-monitoring-logs-with-splunk)
-10. [Troubleshooting](#troubleshooting)
-11. [Next Steps & Future Improvements](#next-steps--future-improvements)
-12. [How to Contribute](#how-to-contribute)
-13. [Conclusion](#conclusion)
+1. [Introduction](#introduction)
+2. [Workflow Overview](#-workflow-overview)
+3. [Prerequisites](#prerequisites)
+4. [Network Topology](#network-topology)
+5. [Step 1: Environment Setup](#️-step-1-environment-setup)
+6. [Step 2: Network Configuration](#-step-2--network-configuration)
+7. [Step 3: Initial Network Scanning](#-step-3--initial-network-scanning)
+8. [Step 4: Scanning & Attempted SMB Exploitation](#-step-4-scanning--attempted-smb-exploitation)
+9. [Step 5: Creating an RDP Vulnerability](#-step-5-creating-an-rdp-vulnerability-)
+10. [Step 6: Payload Creation & Listener Setup](#-step-6-payload-delivery--exploitation-attempt)
+11. [Step 7: Payload Delivery & Reverse Shell](#️-step-7-payload-delivery--reverse-shell-gained)
+12. [Step 8: Splunk Analysis of Malware Execution](#-step-8-splunk-analysis-of-malware-execution-)
+13. [Step 9: Correlating Reverse Shell Activity with Splunk Logs](#-step-9-correlating-reverse-shell-activity-with-splunk-logs-)
+14. [Next Steps & Future Enhancements](#-next-steps--future-enhancements)
+15. [Conclusion](#-conclusion)
+16. [Let’s Connect](#-lets-connect)
+
 
 ---
 ## 📌Introduction
