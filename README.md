@@ -101,7 +101,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 
 ---  
 
-## 🔍 Step 3: 🕵️ Initial Network Scanning
+## 🌐 Step 3: 🛠 Initial Network Scanning
 📤 From Kali Linux, sent ping scan → ❌ blocked by Windows Defender Firewall.  
 🛰 Ran Nmap scan → 🔒 all ports filtered.  
 🔄 From Windows 10, pinged Kali Linux → ✅ success.  
