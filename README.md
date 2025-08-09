@@ -17,7 +17,7 @@
 
 ---  
 ## 📌#Introduction  
-  This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
+    This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
 
 The setup includes:  
 💻 Windows 10 Virtual Machine – The target machine  
