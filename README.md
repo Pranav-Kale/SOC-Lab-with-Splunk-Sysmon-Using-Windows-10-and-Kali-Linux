@@ -3,7 +3,7 @@
 ## Table of Contents 
 1. [Introduction](#introduction)
 2. [Workflow Overview](#-workflow-overview)
-3. [Prerequisites](#prerequisites)
+3. [Prerequisites](#-prerequisites)
 4. [Network Topology](#network-topology)
 5. [Step 1: Environment Setup](#️-step-1-environment-setup)
 6. [Step 2: Network Configuration](#-step-2--network-configuration)
@@ -20,7 +20,7 @@
 
 
 ---  
-## 📌#Introduction  
+## 📌Introduction  
 This project demonstrates the creation of a Security Operations Center Home (SOC Home) Lab Environment for practicing cybersecurity attacks and monitoring. The lab simulates a realistic attack–defense scenario within an isolated network.  
 
 The setup includes:  
@@ -35,7 +35,7 @@ Both VMs communicate only within the isolated network
 
 ---  
 
-🔍 #Workflow Overview  
+🔍 Workflow Overview  
 
 ⚙️ Setup & Configuration :   
 💻 Install & configure Splunk on Windows 10  
