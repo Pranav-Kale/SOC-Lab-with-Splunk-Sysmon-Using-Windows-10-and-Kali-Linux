@@ -72,14 +72,7 @@ Covers SMB brute-force login attempts and RDP exploitation scenarios
 
 🌐 Network Topology  
 Below is the network topology of the SOCHOM lab environment:  
-
-   [Kali Linux VM (Attacker)]  --->  [Windows 10 VM (Target)]  
-                                        │  
-                                        ▼  
-                                  [Sysmon (Log Agent)]  
-                                        │  
-                                        ▼  
-                               [Splunk (SIEM & Monitoring)]  
+<img width="577" height="199" alt="diagram-export-8-9-2025-8_06_10-PM" src="https://github.com/user-attachments/assets/d9492b0a-4bf7-4905-81f1-693fed0037de" />
 
 ---  
 
