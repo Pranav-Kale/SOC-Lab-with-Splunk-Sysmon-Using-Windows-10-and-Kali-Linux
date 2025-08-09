@@ -90,7 +90,10 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 🖥 Windows 10 VM → 192.168.56.2  
 💻 Kali Linux VM → 192.168.56.3  
 📡 Ensured both VMs can communicate within the lab.  
-📸 [Image placeholder: LAN Segment & IP settings]  
+📸 [Image placeholder: LAN Segment & IP settings] 
+<img width="723" height="566" alt="Screenshot_2025-08-09_04_50_14" src="https://github.com/user-attachments/assets/9fc60ddf-2b1a-401c-944f-ef5b1a22fe34" />
+<img width="405" height="463" alt="Screenshot 2025-08-09 015250" src="https://github.com/user-attachments/assets/84137f91-8150-43e8-bb99-42413128a7e5" />
+
 
 ---  
 
