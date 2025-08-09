@@ -2,7 +2,7 @@
 
 ## Table of Contents 
 1. [Introduction](#introduction)
-2. [Workflow Overview](#-workflow-overview)
+2. [Workflow Overview](#workflow-overview)
 3. [Prerequisites](#-prerequisites)
 4. [Network Topology](#network-topology)
 5. [Step 1: Environment Setup](#️-step-1-environment-setup)
