@@ -138,8 +138,10 @@ exploit
 
 ❌ Result: No luck — Windows 10 machine was patched 🛡 and immune to the exploit.  
 
-📸 [Image placeholders: Nmap showing 135, 445, 8000, 8089 | SMB exploit attempt screenshot]  
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e238f7e1-fc89-4282-b2b3-490cb38e6e00" alt="LAN Segment & IP settings" width="350" />
+</p>
+ 
 ---  
 
 🔄 Step 5: Creating an RDP Vulnerability 💻🔓  
@@ -164,10 +166,15 @@ Ensured Network Level Authentication was disabled to reduce restrictions.
 📊 Final Check:  
 Ran Nmap again → ✅ Port 3389 OPEN 🎉  
 Ready for RDP exploitation in the next step!  
-
-📸 [Image placeholders: RDP enable in settings | Registry edit screenshot | gpedit.msc config | Nmap showing 3389 open]  
+ 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9c3f884c-812c-4c11-9659-1e4f9a9926ed" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/d57030d2-f85d-49b7-a4a0-fbea9f53cac1" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/697bc3cc-0083-41f9-9a5e-e5334e51d28d" alt="VMware Settings" width="250" />
+</p>
 
 ---  
+
 
 🚀 Step 6: 🎯 Payload Delivery & Exploitation Attempt  
 With RDP (3389) now open 🔓, I moved on to creating and delivering a malicious payload for exploitation.  
@@ -202,6 +209,12 @@ Ready for delivery to target 🎯 (execution attempt covered in the next step)
 
 📸 [Image placeholders: MSFvenom terminal output | Metasploit listener setup | Python HTTP server running on 9999]  
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3e75489f-aa7b-4aa8-abca-54ea410ca2d7" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/b384ec69-3a8b-4c68-9cf5-a01ae3a25b9f" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/2d1547f3-8caa-4233-88ec-084f942687f1" alt="VMware Settings" width="250" />
+</p>
+
 ---  
 
 🖥️ Step 7: 🎯 Payload Delivery & Reverse Shell Gained  
@@ -229,6 +242,12 @@ net user
 
 📸 [Image placeholders: Download warning in Chrome | Meterpreter session on Kali | Commands executed]  
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ca0e12ba-a017-4a4f-9d0b-b420e156b3ca" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/9a5db2c0-4e8e-431e-9fb3-7a66d3c37968" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/0eaa2f31-45c5-4fe3-afab-6fe42176bf5a" alt="VMware Settings" width="250" />
+</p>
+
 ---  
 
 📊 Step 8: Splunk Analysis of Malware Execution 🕵️‍♂️  
@@ -240,6 +259,10 @@ index=endpoint
 🔍 (endpoint was the index created earlier to store endpoint logs — including Sysmon data)  
 3️⃣ Located multiple logs for system activities.  
 4️⃣ Focused search to find malware traces:  
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/03c42cf9-6fd0-40eb-a969-849e7c6e6a43" alt="LAN Segment & IP settings" width="350" />
+</p>
+
 
 index=endpoint "projectreport.pdf.exe"  
 📌 Found several logs related to the file execution.  
@@ -257,9 +280,15 @@ parent_process 🏗️ — Process that spawned this activity
 image 🖼️ — Executable file path  
 command_line 💻 — Full execution command  
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/69f2784d-7fe3-4a02-aacd-1a3a98ba3655" alt="LAN Segment & IP settings" width="350" />
+</p>
+
 📌 Result  
 ✅ Successfully correlated malware file execution with process hierarchy and timeline.  
-✅ Identified parent process, full path, and execution command for forensic reporting.  
+✅ Identified parent process, child process, full path, and execution command for forensic reporting.  
+
+
 
 ---  
 
