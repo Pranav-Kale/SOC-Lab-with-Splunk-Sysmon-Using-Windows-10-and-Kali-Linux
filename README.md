@@ -91,8 +91,8 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 💻 Kali Linux VM → 192.168.56.3  
 📡 Ensured both VMs can communicate within the lab.  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9fc60ddf-2b1a-401c-944f-ef5b1a22fe34" alt="LAN Segment & IP settings" width="350" />
-  <img src="https://github.com/user-attachments/assets/84137f91-8150-43e8-bb99-42413128a7e5" alt="VMware Settings" width="250" />
+  <img height="199" src="https://github.com/user-attachments/assets/9fc60ddf-2b1a-401c-944f-ef5b1a22fe34" alt="LAN Segment & IP settings" width="250" />
+  <img height="199" src="https://github.com/user-attachments/assets/84137f91-8150-43e8-bb99-42413128a7e5" alt="VMware Settings" width="250" />
 </p>
 
 
@@ -113,8 +113,8 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 🔄 From Windows 10, pinged Kali Linux → ✅ success.  
 🛑 Disabled Public Network Firewall on Windows 10 for testing.  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d93f2312-79db-422d-87ed-d5c849d9a072" alt="LAN Segment & IP settings" width="350" />
-  <img src="https://github.com/user-attachments/assets/0e096288-b68f-4d9e-8d54-3dc371355a36" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/d93f2312-79db-422d-87ed-d5c849d9a072" alt="LAN Segment & IP settings" width="250" height="199" />
+  <img src="https://github.com/user-attachments/assets/0e096288-b68f-4d9e-8d54-3dc371355a36" alt="VMware Settings" width="250" height="199" />
 </p>
 
 
@@ -139,7 +139,7 @@ Install Sysmon from Sysinternals using sysmonconfig.xml → Verify it’s runnin
 ❌ Result: No luck — Windows 10 machine was patched 🛡 and immune to the exploit.  
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e238f7e1-fc89-4282-b2b3-490cb38e6e00" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/e238f7e1-fc89-4282-b2b3-490cb38e6e00" alt="LAN Segment & IP settings" width="250" height="199" />
 </p>
  
 ---  
@@ -172,9 +172,9 @@ Ran Nmap again → ✅ Port 3389 OPEN 🎉
 Ready for RDP exploitation in the next step!  
  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9c3f884c-812c-4c11-9659-1e4f9a9926ed" alt="LAN Segment & IP settings" width="250" />
-  <img src="https://github.com/user-attachments/assets/d57030d2-f85d-49b7-a4a0-fbea9f53cac1" alt="VMware Settings" width="250" />
-  <img src="https://github.com/user-attachments/assets/697bc3cc-0083-41f9-9a5e-e5334e51d28d" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/9c3f884c-812c-4c11-9659-1e4f9a9926ed" alt="LAN Segment & IP settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/d57030d2-f85d-49b7-a4a0-fbea9f53cac1" alt="VMware Settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/697bc3cc-0083-41f9-9a5e-e5334e51d28d" alt="VMware Settings" width="250" height="199"/>
 </p>
 
 ---  
@@ -213,9 +213,9 @@ Payload successfully hosted & accessible ✅
 Ready for delivery to target 🎯 (execution attempt covered in the next step)   
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3e75489f-aa7b-4aa8-abca-54ea410ca2d7" alt="LAN Segment & IP settings" width="350" />
-  <img src="https://github.com/user-attachments/assets/b384ec69-3a8b-4c68-9cf5-a01ae3a25b9f" alt="VMware Settings" width="250" />
-  <img src="https://github.com/user-attachments/assets/2d1547f3-8caa-4233-88ec-084f942687f1" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/3e75489f-aa7b-4aa8-abca-54ea410ca2d7" alt="LAN Segment & IP settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/b384ec69-3a8b-4c68-9cf5-a01ae3a25b9f" alt="VMware Settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/2d1547f3-8caa-4233-88ec-084f942687f1" alt="VMware Settings" width="250" height="199"/>
 </p>
 
 ---  
@@ -244,9 +244,9 @@ Inside Meterpreter:
 📌 Gathered network info, checked user accounts, and enumerated privileges 👀  
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ca0e12ba-a017-4a4f-9d0b-b420e156b3ca" alt="LAN Segment & IP settings" width="350" />
-  <img src="https://github.com/user-attachments/assets/9a5db2c0-4e8e-431e-9fb3-7a66d3c37968" alt="VMware Settings" width="250" />
-  <img src="https://github.com/user-attachments/assets/0eaa2f31-45c5-4fe3-afab-6fe42176bf5a" alt="VMware Settings" width="250" />
+  <img src="https://github.com/user-attachments/assets/ca0e12ba-a017-4a4f-9d0b-b420e156b3ca" alt="LAN Segment & IP settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/9a5db2c0-4e8e-431e-9fb3-7a66d3c37968" alt="VMware Settings" width="250" height="199"/>
+  <img src="https://github.com/user-attachments/assets/0eaa2f31-45c5-4fe3-afab-6fe42176bf5a" alt="VMware Settings" width="250" height="199"/>
 </p>
 
 ---  
@@ -262,7 +262,7 @@ Inside Meterpreter:
 3️⃣ Located multiple logs for system activities.  
 4️⃣ Focused search to find malware traces:  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/03c42cf9-6fd0-40eb-a969-849e7c6e6a43" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/03c42cf9-6fd0-40eb-a969-849e7c6e6a43" alt="LAN Segment & IP settings" width="350" height="250"/>
 </p>
 
 
@@ -283,7 +283,7 @@ image 🖼️ — Executable file path
 command_line 💻 — Full execution command  
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/69f2784d-7fe3-4a02-aacd-1a3a98ba3655" alt="LAN Segment & IP settings" width="350" />
+  <img src="https://github.com/user-attachments/assets/69f2784d-7fe3-4a02-aacd-1a3a98ba3655" alt="LAN Segment & IP settings" width="350" height="250"/>
 </p>
 
 📌 Result  
