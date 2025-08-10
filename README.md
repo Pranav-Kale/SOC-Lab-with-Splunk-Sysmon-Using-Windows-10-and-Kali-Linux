@@ -13,7 +13,8 @@
 10. [Step 6: Payload Creation & Listener Setup](#-step-6--payload-delivery-&-exploitation-attempt)
 11. [Step 7: Payload Delivery & Reverse Shell](#️-step-7--payload-delivery-&-reverse-shell-gained)
 12. [Step 8: Splunk Analysis of Malware Execution](#-step-8-splunk-analysis-of-malware-execution-)
-13. [Step 9: Correlating Reverse Shell Activity with Splunk Logs](#-step-9-correlating-reverse-shell-activity-with-splunk-logs-)
+13. [Step 9: Step 9: Created a Dashboard for Better Understanding](#-step-9-created-a-dashboard-for-better-understanding-)
+13. [Step 10: Correlating Reverse Shell Activity with Splunk Logs](#-step-9-correlating-reverse-shell-activity-with-splunk-logs-)
 14. [Next Steps & Future Enhancements](#-next-steps--future-enhancements)
 15. [Conclusion](#-conclusion)
 16. [Let’s Connect](#-lets-connect)
@@ -287,7 +288,8 @@ R    eady for delivery to target 🎯 (execution attempt covered in the next ste
 
 ## 🛠️ Step 9: Created a Dashboard for Better Understanding
 Designed and implemented a comprehensive Splunk dashboard to visualize key security metrics and events. This dashboard includes charts for top source IPs, destination ports, user logons, process executions, suspicious parent-child process relationships, reverse shell indicators, registry key changes, and detailed endpoint logs. It helps in monitoring and quickly identifying potential security incidents during the SOC lab exercises.
-<img width="1920" height="400" alt="screencapture-127-0-0-1-8000-en-GB-app-search-soc-lab-monitoring-project-1-2025-08-09-22_54_02" src="https://github.com/user-attachments/assets/36906830-5361-49ee-8b03-ccf5acf3134b" />
+
+<img width="1904" height="500" alt="Dashboard_graphs" src="https://github.com/user-attachments/assets/555803d1-8449-4495-9118-12fb5ab0ae54" />
 
 
 ---  
