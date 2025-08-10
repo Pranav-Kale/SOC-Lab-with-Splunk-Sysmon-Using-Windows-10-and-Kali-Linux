@@ -283,11 +283,16 @@ R    eady for delivery to target 🎯 (execution attempt covered in the next ste
     ✅ Successfully correlated malware file execution with process hierarchy and timeline.  
     ✅ Identified parent process, child process, full path, and execution command for forensic reporting.  
 
+---  
+
+## 🛠️ Step 9: Created a Dashboard for Better Understanding
+Designed and implemented a comprehensive Splunk dashboard to visualize key security metrics and events. This dashboard includes charts for top source IPs, destination ports, user logons, process executions, suspicious parent-child process relationships, reverse shell indicators, registry key changes, and detailed endpoint logs. It helps in monitoring and quickly identifying potential security incidents during the SOC lab exercises.
+<img width="1920" height="400" alt="screencapture-127-0-0-1-8000-en-GB-app-search-soc-lab-monitoring-project-1-2025-08-09-22_54_02" src="https://github.com/user-attachments/assets/36906830-5361-49ee-8b03-ccf5acf3134b" />
 
 
 ---  
 
-## 🔍 Step 9: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣
+## 🔍 Step 10: Correlating Reverse Shell Activity with Splunk Logs 🖥️💣
 💡 Objective: Map the attacker’s actions (Meterpreter session) to endpoint telemetry collected by Splunk for full visibility.  
 
 🛠️ Actions Performed  
@@ -322,7 +327,7 @@ File Download → Execution → Reverse Shell → Commands → Detection in Splu
 🔍 Option 1: Deploy ELK Stack for deeper, faster, and more flexible log analysis — fully customized for your environment.  
 🛡️ Option 2: Deploy Wazuh SIEM (built on ELK) for advanced threat detection, automated correlation rules, and ready-made SOC dashboards.  
 🐍 Use Python automation scripts to streamline the attack workflow.  
-📟 Build a custom SOC dashboard that triggers real-time alerts when suspicious signatures, malware patterns, or specific attack indicators are detected — allowing analysts to respond instantly.  
+📟 Build a more advanced SOC dashboard that triggers real-time alerts when suspicious signatures, malware patterns, or specific attack indicators are detected — allowing analysts to respond instantly.  
 
 ---  
 
