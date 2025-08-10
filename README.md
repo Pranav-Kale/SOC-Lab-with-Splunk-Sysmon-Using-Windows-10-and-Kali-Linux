@@ -13,7 +13,7 @@
 10. [Step 6: Payload Creation & Listener Setup](#-step-6--payload-delivery-&-exploitation-attempt)
 11. [Step 7: Payload Delivery & Reverse Shell](#️-step-7--payload-delivery-&-reverse-shell-gained)
 12. [Step 8: Splunk Analysis of Malware Execution](#-step-8-splunk-analysis-of-malware-execution-)
-13. [Step 9: Step 9: Created a Dashboard for Better Understanding](#-step-9-created-a-dashboard-for-better-understanding-)
+13. [Step 9: Created a Dashboard for Better Understanding](#-step-9-created-a-dashboard-for-better-understanding-)
 13. [Step 10: Correlating Reverse Shell Activity with Splunk Logs](#-step-9-correlating-reverse-shell-activity-with-splunk-logs-)
 14. [Next Steps & Future Enhancements](#-next-steps--future-enhancements)
 15. [Conclusion](#-conclusion)
